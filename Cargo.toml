@@ -3,6 +3,22 @@ name = "check_perfdata"
 version = "0.1.0"
 edition = "2018"
 
+[lib]
+name = "perfdata"
+path = "src/lib.rs"
+
+[[bin]]
+name = "check_perfdata"
+path = "src/bin/check_perfdata.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+regex = "1.5"
+lazy_static = "1.4.0"
+clap = "2.34.0"
+structopt = "0.3"
+
+[dev-dependencies]
+assert_cmd = "2.0"
+predicates = "2.1"
