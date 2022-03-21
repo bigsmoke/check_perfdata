@@ -1,0 +1,38 @@
+= `check_perfdata`
+
+Pipe your perfdata and out comes your monitoring plugin status and output.
+That's the premise of `check_perfdata`. Instead of writing a full-fledged
+Nagios-compatible monitoring plugin and implement (and muck up) your own
+boundary checking and everything, `check_perfdata` accepts as its input your
+https://www.monitoring-plugins.org/doc/guidelines.html#AEN201[Nagios-compatible
+performance data] and will tell you—actually your monitoring system—whether the
+current value is OK or not.
+
+Here's a very simple example:
+
+[source,language=bash]
+```
+#!/bin/bash
+
+echo "root_space_used=$(df / --output='pcent' | sed '1d;s/^ *//');75;85" | check_perfdata
+```
+
+That's it! You just wrote a monitoring plugin that will trigger a `WARNING` if
+the disk usage passes 75% and a `CRITICAL` if it passes 85%.
+
+`check_perfdata` can achieve this because of the information that is present in
+a simple performance data line. It must be admitted that the format that the
+Nagios deviced for the
+https://www.monitoring-plugins.org/doc/guidelines.html#AEN201[performance data]
+in their
+https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/pluginapi.html[plugin
+interface] is … Well, let's say that it's _concise_. But, it has sufficient
+expressivity needed for a lot of use cases.
+
+See the inline help (`check_perfdata --help`) for more usage instructions.
+
+== Contributing
+
+The initial version of `check_perfdata` is written by Rowan, who is still a
+newcomer to Rust, and who would love critical comments and pull requests on the
+code.
