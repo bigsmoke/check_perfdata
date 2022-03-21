@@ -1,6 +1,0 @@
-`check_perfdata_from_http`
-
-```
-Content-Type: text/plain
-X-Monitoring-Plugin-Status: 1
-```
